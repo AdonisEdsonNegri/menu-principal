@@ -10,7 +10,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -20,7 +19,6 @@
             align-items: center;
             padding: 20px;
         }
-
         .container {
             background: white;
             padding: 50px;
@@ -29,20 +27,17 @@
             max-width: 500px;
             width: 100%;
         }
-
         h1 {
             color: #667eea;
             text-align: center;
             margin-bottom: 40px;
             font-size: 2.5em;
         }
-
         .menu {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
         .menu-item {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -54,29 +49,82 @@
             font-weight: bold;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+            width: 100%;
         }
-
         .menu-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
-
         .menu-item:active {
             transform: translateY(-2px);
         }
-
+        
+        .submenu {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .submenu.active {
+            display: flex;
+        }
+        
+        .submenu-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .submenu-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .submenu-item.disabled {
+            background: linear-gradient(135deg, #ccc 0%, #999 100%);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .submenu-item.disabled:hover {
+            transform: none;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.3);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.7em;
+            margin-left: 8px;
+        }
+        
         @media (max-width: 600px) {
             .container {
                 padding: 30px;
             }
-
             h1 {
                 font-size: 2em;
             }
-
             .menu-item {
                 padding: 20px;
                 font-size: 1.2em;
+            }
+            .submenu-item {
+                font-size: 1em;
             }
         }
     </style>
@@ -97,7 +145,31 @@
             <a href="https://calculadora-hipotenusa.vercel.app/" class="menu-item" target="_blank">
                 📐 Hipotenusa
             </a>
+            
+            <div>
+                <button class="menu-item" onclick="toggleSubmenu()">
+                    📝 Cadastros
+                </button>
+                <div id="submenuCadastros" class="submenu">
+                    <a href="https://produtos-orcin.vercel.app/" class="submenu-item" target="_blank">
+                        📦 Produtos
+                    </a>
+                    <a href="#" class="submenu-item disabled" onclick="return false;">
+                        👥 Clientes <span class="badge">Em breve</span>
+                    </a>
+                    <a href="#" class="submenu-item disabled" onclick="return false;">
+                        🏢 Fornecedores <span class="badge">Em breve</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <script>
+        function toggleSubmenu() {
+            const submenu = document.getElementById('submenuCadastros');
+            submenu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
